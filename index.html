@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Student Score Predictor</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+    --leaf:#2f5d3a;
+    --sand:#d9c7a7;
+    --earth:#6b4226;
+    --sun:#c49b3d;
+    --glass:rgba(255,255,255,0.08);
+}
+
+body{
+    font-family:'Lato',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(47,93,58,0.4), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(196,155,61,0.3), transparent 60%),
+        linear-gradient(160deg,#0f1c12,#1b2b1f,#0c1610);
+    overflow:hidden;
+    color:white;
+}
+
+/* floating soft glow */
+body::after{
+    content:'';
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
+    filter:blur(80px);
+    animation:float 8s ease-in-out infinite alternate;
+}
+@keyframes float{
+    from{transform:translate(-50px,-50px);}
+    to{transform:translate(50px,50px);}
+}
+
+/* glass card */
+.card{
+    width:450px;
+    padding:50px 40px;
+    border-radius:20px;
+    backdrop-filter:blur(25px);
+    background:var(--glass);
+    border:1px solid rgba(255,255,255,0.1);
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    text-align:center;
+    animation:fade 1s ease;
+}
+@keyframes fade{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+h1{
+    font-family:'Playfair Display',serif;
+    font-size:32px;
+    color:var(--sand);
+    margin-bottom:10px;
+}
+
+.subtitle{
+    font-size:13px;
+    opacity:0.7;
+    margin-bottom:30px;
+    letter-spacing:2px;
+}
+
+/* input */
+input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.07);
+    color:white;
+    outline:none;
+    font-size:15px;
+    margin-bottom:20px;
+    transition:0.3s;
+}
+input:focus{
+    border-color:var(--sun);
+    background:rgba(255,255,255,0.12);
+}
+
+/* button */
+button{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    font-weight:600;
+    letter-spacing:2px;
+    background:linear-gradient(135deg,var(--leaf),var(--sun));
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* result */
+.result{
+    margin-top:30px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    animation:pop 0.6s ease;
+}
+@keyframes pop{
+    from{opacity:0;transform:scale(0.9);}
+    to{opacity:1;transform:scale(1);}
+}
+
+.score{
+    font-size:60px;
+    font-family:'Playfair Display',serif;
+    background:linear-gradient(135deg,var(--sun),var(--sand));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.footer{
+    margin-top:25px;
+    font-size:11px;
+    opacity:0.6;
+    letter-spacing:2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Student Score Predictor</h1>
+    <div class="subtitle">NATURAL • TRANSPARENT • AI POWERED</div>
+
+    <form method="post">
+        <input type="number" name="hours" step="0.1" min="0" placeholder="Enter study hours" required>
+        <button type="submit">PREDICT SCORE</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+        <div>Your Predicted Score</div>
+        <div class="score">{{ prediction }}</div>
+        <div style="margin-top:8px;font-size:12px;opacity:0.7;">
+            🌿 Keep Growing Naturally
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="footer">Made with ♥ in South India</div>
+</div>
+
+</body>
+</html>
